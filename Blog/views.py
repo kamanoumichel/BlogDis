@@ -81,6 +81,15 @@ def about(request):
     return render(request,"Blog/a_propos.html")
 
 def detail(request,slug:str):
+    postglo=Post.published.all().order_by('-id')
+    paginator=Paginator(postglo,3)
+    page=request.GET.get('page')
+    try:
+        postglo=paginator.page(page)
+    except PageNotAnInteger:
+        postglo=paginator.page(1)
+    except EmptyPage:
+        postglo=paginator.page(paginator.num_pages)
     article=get_object_or_404(Post,slug=slug)
     commentaire=article.comments.all()
     if request.method=='POST':
@@ -101,6 +110,7 @@ def detail(request,slug:str):
         'post_date':article.date_publication,
         'comments':cmf,
         'cm_list':commentaire,
-        'post_category':article.category, 
+        'post_category':article.category,
+        'postglo':postglo,
     }
     return render(request,"Blog/detail.html",context)

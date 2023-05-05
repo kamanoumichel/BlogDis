@@ -17,7 +17,14 @@
                 <p class="tm-mb-40">⏲️Publiez le: {{post_date}} | Publiez Par: {{post_author}}</p>
                 <p class="tm-mb-40">
                     <button class="btn btn-dark" onclick="window.print()"><i class="fas fa-print"></i></button>
-                    <button class="btn btn-secondary" ><a href="http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"><i class="fas fa-share-alt"></i></a></button>
+                    <button class="btn btn-secondary" id="par1"><i class="fas fa-share-alt"></i></button>
+                </p>
+                <p class="tm-mb-40" id="partage">
+                    <a href="http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"><button class="btn btn-primary" ><i class="fab fa-facebook-f"></i></button></a>
+                    <a href="http://www.twitter.com/intent/tweet?text={{ post_title }}&url={{ request.build_absolute_uri }}" target="_blank"><button class="btn btn-primary" ><i class="fab fa-twitter"></i></button></a>
+                    <a href="http://www.wa.me/?text={{ request.build_absolute_uri }}" target="_blank"><button class="btn btn-success"><i class="fab fa-whatsapp"></i></button></a>
+                    <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post_title }}" target="_blank"><button class="btn btn-info"><i class="fab fa-linkedin-in"></i></button></a>
+                
                 </p>
                 <p>{{post_cnt}}</p>
                 
@@ -26,7 +33,7 @@
 
             <!-- Comments -->
             <div>
-                <h2 class="tm-color-primary tm-post-title">Commentaires</h2>
+                <h2 class="tm-color-primary tm-post-title">#{{cm_list|length}}# Commentaires</h2>
                 <hr class="tm-hr-primary tm-mb-45">
                 {% for i in cm_list %}
                 <div class="tm-comment tm-mb-45">
@@ -78,14 +85,18 @@
             </ul>
             <hr class="mb-3 tm-hr-primary">
             <h2 class="tm-mb-40 tm-post-title tm-color-primary">Publications récentes</h2>
-            <a href="#" class="d-block tm-mb-40">
+            {% for pst in postglo %}
+            <a href="{% url 'detail' pst.slug %}" class="d-block tm-mb-40">
                 <figure>
-                    <img src="img/img-02.jpg" alt="Image" class="mb-3 img-fluid">
-                    <figcaption class="tm-color-primary">Duis mollis diam nec ex viverra scelerisque a sit</figcaption>
+                    <img src="{{ pst.image.url }}" alt="Image" class="mb-3 img-fluid">
+                    <figcaption class="tm-color-primary">{{pst.titre}}</figcaption>
                 </figure>
             </a>
-            
+            {% endfor %}
         </div>                    
     </aside>
 </div>
+<script>
+
+</script>
 {% endblock global %}

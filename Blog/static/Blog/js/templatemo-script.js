@@ -15,4 +15,8 @@ $(function() {
       $("#tm-nav .nav-link").click(function(e) {
         $(".tm-header").removeClass("show");
       });
+      $('#partage').hide();
+      $("#par1").on("click",function(e){
+        $('#partage').toggle();
+      });
 });
