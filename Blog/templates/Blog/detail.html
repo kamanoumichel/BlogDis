@@ -15,6 +15,10 @@
             <div class="mb-4">
                 <h2 class="pt-2 tm-color-primary tm-post-title">{{post_title}}</h2>
                 <p class="tm-mb-40">⏲️Publiez le: {{post_date}} | Publiez Par: {{post_author}}</p>
+                <p class="tm-mb-40">
+                    <button class="btn btn-dark" onclick="window.print()"><i class="fas fa-print"></i></button>
+                    <button class="btn btn-secondary" ><a href="http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"><i class="fas fa-share-alt"></i></a></button>
+                </p>
                 <p>{{post_cnt}}</p>
                 
                 <span class="d-block text-right tm-color-primary">{{post_category}}</span>
